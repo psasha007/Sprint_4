@@ -94,16 +94,16 @@ public class OrderByScooterTest {
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
 
-        sleep(1000);
+        //sleep(1000);
         dialogPageWhoIs.clickHomePageUpButton();
 
-        sleep(1000);
-        dialogPageWhoIs.setWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
+        //sleep(1000);
+        dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
 
-        sleep(2000);
+        //sleep(2000);
         dialogPageAboutRent.setAboutRent(date, textForCourier, verifyText);
 
-        sleep(2000);
+        //sleep(2000);
     }
 
     @Test
@@ -112,19 +112,16 @@ public class OrderByScooterTest {
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
 
-        WebElement element = driver.findElement(By.cssSelector(".Button_Button__ra12g.Button_UltraBig__UU3Lp"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-
-        sleep(1000);
+        //sleep(1000);
         dialogPageWhoIs.clickHomePageDownButton();
 
-        sleep(1000);
-        dialogPageWhoIs.setWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
+        //sleep(1000);
+        dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
 
-        sleep(2000);
+        //sleep(2000);
         dialogPageAboutRent.setAboutRent(date, textForCourier, verifyText);
 
-        sleep(2000);
+        //sleep(2000);
     }
 
     //

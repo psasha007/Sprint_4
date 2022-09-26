@@ -1,12 +1,14 @@
 package additionaltes;
 
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static java.lang.Thread.sleep;
+import java.util.Iterator;
+import java.util.Set;
 
 // Класс на странице "Для кого самокат" для проверки сообщений
 public class ErrorsForOrderFormFields {
@@ -45,55 +47,62 @@ public class ErrorsForOrderFormFields {
     // Локатор для Кнопки "Далее"
     private By locatorButtonNext = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
 
-    // Введите корректное имя
+    // метод проверяет сообщение об ошибке "Введите корректное имя"
     public void verifyFieldName(String expected){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldName));
         WebElement actual = driver.findElement(locatorFieldName);
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
     }
 
     // метод проверяет сообщение об ошибке "Введите корректную фамилию"
     public void verifyFieldSurname(String expected){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldSurname));
         WebElement actual = driver.findElement(locatorFieldSurname);
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
     }
 
     // метод проверяет сообщение об ошибке "Введите корректный адрес"
     public void verifyFieldAdress(String adress, String expected) throws InterruptedException {
-        sleep(500);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldAdress));
         driver.findElement(locatorFieldAdress).sendKeys(adress);
-        sleep(500);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldAdressTextError));
         WebElement actual = driver.findElement(locatorFieldAdressTextError);
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
     }
 
     // метод проверяет сообщение об ошибке "Выберите станцию"
     public void verifyFieldMetro(String expected){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldMetro));
         WebElement actual = driver.findElement(locatorFieldMetro);
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
     }
 
     // метод проверяет сообщение об ошибке "Введите корректный номер"
     public void verifyFieldNumberForCourier(String expected){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldNumberForCourier));
         WebElement actual = driver.findElement(locatorFieldNumberForCourier);
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
     }
 
     // метод нажимает на верхнюю кнопку Заказать
     public void clickButtonNext(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorButtonNext));
         driver.findElement(locatorButtonNext).click();
     }
 
-    //
+    // метод нажимает на верхнюю  кнопку Заказать
     public void clickHomePageUpButton(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorUpButton));
         driver.findElement(locatorUpButton).click();
     }
 
     // метод нажимает на нижнюю кнопку Заказать
     public void clickHomePageDownButton(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorDownButton));
         driver.findElement(locatorDownButton).click();
     }
 
-    // метод осуществляет проверку
+    // метод осуществляет проверку сообщений об ошибках для полей
     public void verifyTextErrors(
             String nameTextErrors,
             String surnameTextErrors,
@@ -107,6 +116,53 @@ public class ErrorsForOrderFormFields {
         verifyFieldAdress(adress, adressTextErrors);
         verifyFieldMetro(metroTextErrors);
         verifyFieldNumberForCourier(numberForCourierTextErrors);
-        sleep(3000);
+    }
+
+    // ScooterLogoHomePage
+    // Локатор на Главной странице - Иконка «Самокат»
+    private By locatorScooterLogoHomePage = By.className("Header_LogoScooter__3lsAR");
+
+    // Метод проверка url HomePage
+    public void isCheckUrlScooterLogoHomePage(String expected){
+        driver.findElement(locatorScooterLogoHomePage).click();
+        Assert.assertEquals("Ошибка, url не совпадает: ", expected, driver.getCurrentUrl());
+    }
+
+    // YandexLogoHomePage
+    // Локатор на Главной странице - Иконка "Яндекс"
+    private By locatorYandexLogoHomePage = By.cssSelector("#root > div > div > div.Header_Header__214zg > div.Header_Logo__23yGT > a.Header_LogoYandex__3TSOI");
+
+    // Метод проверка url Yandex.ru
+    public void isCheckYandexLogoHomePage(String expected) throws InterruptedException {
+        driver.findElement(locatorYandexLogoHomePage).click();
+        Set<String> s = driver.getWindowHandles();
+        Iterator<String> I1= s.iterator();
+        String child_window=I1.next();
+        child_window=I1.next();
+        driver.switchTo().window(child_window);
+
+        Assert.assertEquals("Ошибка, url не совпадает: ", expected, driver.getCurrentUrl());
+    }
+
+    // WrongOrderNumber
+    // Локатор на Главной странице - Кнопка "Статус заказа"
+    private By locatorOrderStatus = By.className("Header_Link__1TAG7");
+    // Локатор поля для ввода номера заказа
+    private By locatorFieldOrderStatus = By.xpath("//*[@placeholder=\"Введите номер заказа\"]");
+    // Локатор Кнопка "Go"
+    private By locatorButtonGo = By.cssSelector(".Button_Button__ra12g.Header_Button__28dPO");
+    // Локатор image not found
+    private By locatorImageNotFound = By.xpath(".//img[@alt='Not found']");
+
+    // Метод проверяет "что такого заказа нет"
+    public void isCheckWrongOrderNumber(String numberOrder) throws InterruptedException {
+        driver.findElement(locatorOrderStatus).click();
+        driver.findElement(locatorFieldOrderStatus).sendKeys(numberOrder);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorButtonGo));
+        driver.findElement(locatorButtonGo).click();
+
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorImageNotFound));
+        WebElement actual = driver.findElement(locatorImageNotFound);
+        Assert.assertTrue("Expected image not found", actual.isDisplayed());
     }
 }

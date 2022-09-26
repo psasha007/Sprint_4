@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static java.lang.Thread.sleep;
 
@@ -48,43 +50,51 @@ public class DialogPageAboutRent {
 
     // Метод заполняем поле Когда привезти самокат
     public void setFieldWhenToBring(String date) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(fieldWhenToBring));
         driver.findElement(fieldWhenToBring).sendKeys(date);
         driver.findElement(fieldWhenToBring).sendKeys(Keys.ENTER);
     }
 
     // Метод кликаем по выпадающему списку Срок аренды
     public void setFieldRentalPeriod() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(rentalPeriod));
         driver.findElement(rentalPeriod).click();
         driver.findElement(rentalPeriodDay).click();
     }
 
     // Метод отмечаем чек-бокс black
-    public void setCheakBoxBlack() {
+    public void setCheckBoxBlack() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(black));
         driver.findElement(black).click();
     }
 
     // Метод отмечаем чек-бокс grey
-    public void setCheakBoxGray() {
+    public void setCheckBoxGray() {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(grey));
         driver.findElement(grey).click();
     }
 
     // Метод заполняем поле Комментарий для курьера
     public void setFieldTextForCourier(String text) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(fieldTextForCourier));
         driver.findElement(fieldTextForCourier).sendKeys(text);
     }
 
     // Метод кликаем по Заказать
     public void clickButtonOrder(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(clickButtonOrder));
         driver.findElement(clickButtonOrder).click();
     }
 
     // Метод подтверждаем заказ
     public void clickButtonDoYouWantToPlaceAnOrder(){
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(doYouWantToPlaceAnOrder));
         driver.findElement(doYouWantToPlaceAnOrder).click();
     }
 
     // Метод проверки сообщения о заказе
     public void isOrderIsProcessed(String expected) {
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(orderIsProcessed));
         WebElement actual = driver.findElement(orderIsProcessed);
         Assert.assertTrue(actual.getText().contains(expected));
     }
@@ -93,14 +103,14 @@ public class DialogPageAboutRent {
     public void setAboutRent(String date, String textForCourier, String text) throws InterruptedException {
         setFieldWhenToBring(date);
         setFieldRentalPeriod();
-        setCheakBoxBlack();
-        setCheakBoxGray();
+        setCheckBoxBlack();
+        setCheckBoxGray();
         setFieldTextForCourier(textForCourier);
-        sleep(300);
+        //sleep(300);
         clickButtonOrder();
-        sleep(300);
+        //sleep(300);
         clickButtonDoYouWantToPlaceAnOrder();
-        sleep(1000);
+        //sleep(1000);
         isOrderIsProcessed(text);
     }
 }
