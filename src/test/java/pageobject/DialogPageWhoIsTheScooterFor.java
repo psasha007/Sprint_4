@@ -87,7 +87,6 @@ public class DialogPageWhoIsTheScooterFor {
         setFieldAdress(adress);
         setFieldMetro(nameMetro);
         setFieldNumberForCourier(numberForCourier);
-        //sleep(3000);
         clickButtonNext();
     }
 

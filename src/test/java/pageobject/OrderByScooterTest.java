@@ -1,5 +1,6 @@
 package pageobject;
 
+import additionaltes.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -13,12 +14,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 import org.junit.runners.Parameterized;
 
-import static java.lang.Thread.sleep;
-
 @RunWith(Parameterized.class)
 // Класс заказ самоката
 public class OrderByScooterTest {
-    String nameDriver = "chrome";
     WebDriver driver;
     String baseUrl = "https://qa-scooter.praktikum-services.ru/";
 
@@ -62,66 +60,32 @@ public class OrderByScooterTest {
     }
 
     @Before
-    public void startUp() {
-        switch (nameDriver) {
-            case "firefox" :
-                System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                driver.get(baseUrl);
-                break;
-            case "chrome" :
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-                driver = new ChromeDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                driver.get(baseUrl);
-                break;
-            case "chromeOptions" :
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-                driver = new ChromeDriver(options);
-                driver.get(baseUrl);
-                break;
-        }
+    public void startWebDriver() {
+        BaseTest webDriver = new BaseTest();
+        driver = webDriver.chrome(driver, baseUrl);
     }
 
+    // Проверка заказа самоката по кнопке вверху
     @Test
     public void testClickUpButton() throws InterruptedException {
 
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
-
-        //sleep(1000);
         dialogPageWhoIs.clickHomePageUpButton();
-
-        //sleep(1000);
         dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
-
-        //sleep(2000);
-        dialogPageAboutRent.setAboutRent(date, textForCourier, verifyText);
-
-        //sleep(2000);
+        dialogPageAboutRent.setFieldsAboutRent(date, textForCourier, verifyText);
     }
 
+    // Проверка заказа самоката по кнопке внизу
     @Test
     public void testClickDownButton() throws InterruptedException {
 
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
 
-        //sleep(1000);
         dialogPageWhoIs.clickHomePageDownButton();
-
-        //sleep(1000);
         dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
-
-        //sleep(2000);
-        dialogPageAboutRent.setAboutRent(date, textForCourier, verifyText);
-
-        //sleep(2000);
+        dialogPageAboutRent.setFieldsAboutRent(date, textForCourier, verifyText);
     }
 
     //

@@ -2,6 +2,7 @@ package questionspage;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -121,5 +122,13 @@ public class HomePageQuestions {
         WebElement actual = driver.findElement(iLiveOutsideTheMoscowRingText);
 
         Assert.assertEquals("Ошибка, текст не совпадает: ", expected, actual.getText());
+    }
+
+    // Локатор для прокрутки
+    private String locatorScroll = "arguments[0].scrollIntoView();";
+    // Прокрутка до элемента на странице "Самокат на пару дней"
+    public void scrollPageDown(){
+        WebElement element = driver.findElement(iLiveOutsideTheMoscowRing);
+        ((JavascriptExecutor)driver).executeScript(locatorScroll, element);
     }
 }

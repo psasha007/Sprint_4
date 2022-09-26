@@ -8,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static java.lang.Thread.sleep;
-
 // Класс Диалога на странице "Про аренду"
 public class DialogPageAboutRent {
 
@@ -100,17 +98,14 @@ public class DialogPageAboutRent {
     }
 
     // Заполнение формы "Про аренду"
-    public void setAboutRent(String date, String textForCourier, String text) throws InterruptedException {
+    public void setFieldsAboutRent(String date, String textForCourier, String text) throws InterruptedException {
         setFieldWhenToBring(date);
         setFieldRentalPeriod();
         setCheckBoxBlack();
         setCheckBoxGray();
         setFieldTextForCourier(textForCourier);
-        //sleep(300);
         clickButtonOrder();
-        //sleep(300);
         clickButtonDoYouWantToPlaceAnOrder();
-        //sleep(1000);
         isOrderIsProcessed(text);
     }
 }

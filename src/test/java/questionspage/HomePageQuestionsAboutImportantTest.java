@@ -1,5 +1,6 @@
 package questionspage;
 
+import additionaltes.BaseTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
@@ -17,33 +18,11 @@ public class HomePageQuestionsAboutImportantTest {
     String baseUrl = "https://qa-scooter.praktikum-services.ru/";
 
     @Before
-    public void startUp() {
-        switch (nameDriver) {
-            case "firefox" :
-                System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                driver.get(baseUrl);
-            break;
-            case "chrome" :
-                System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
-                driver = new ChromeDriver();
-                driver.manage().window().maximize();
-                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-                driver.get(baseUrl);
-            break;
-            case "chromeOptions" :
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-                driver = new ChromeDriver(options);
-                driver.get(baseUrl);
-            break;
-        }
-        // Прокрутка до элемента на странице "Самокат на пару дней"
-        WebElement element = driver.findElement(By.cssSelector("#accordion__heading-7"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+    public void startWebDriver() {
+        BaseTest webDriver = new BaseTest();
+        driver = webDriver.chrome(driver, baseUrl);
+        HomePageQuestions scrollDown = new HomePageQuestions(driver);
+        scrollDown.scrollPageDown();
     }
 
     // HowMuchDoesItCostAndHowToPay - Сколько это стоит? И как оплатить?

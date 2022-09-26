@@ -132,6 +132,8 @@ public class ErrorsForOrderFormFields {
     // Локатор на Главной странице - Иконка "Яндекс"
     private By locatorYandexLogoHomePage = By.cssSelector("#root > div > div > div.Header_Header__214zg > div.Header_Logo__23yGT > a.Header_LogoYandex__3TSOI");
 
+    // Локатор на Главной странице - "Яндекс"
+    private By locatorDzen = By.cssSelector(".dzen-top-controls-desktop__buttonText-3_");
     // Метод проверка url Yandex.ru
     public void isCheckYandexLogoHomePage(String expected) throws InterruptedException {
         driver.findElement(locatorYandexLogoHomePage).click();
@@ -140,6 +142,7 @@ public class ErrorsForOrderFormFields {
         String child_window=I1.next();
         child_window=I1.next();
         driver.switchTo().window(child_window);
+        new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(locatorDzen));
 
         Assert.assertEquals("Ошибка, url не совпадает: ", expected, driver.getCurrentUrl());
     }
