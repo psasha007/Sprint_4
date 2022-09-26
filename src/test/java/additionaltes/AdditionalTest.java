@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
-public class additionalTest {
+public class AdditionalTest {
     String nameDriver = "chrome";
     WebDriver driver;
     String baseUrl = "https://qa-scooter.praktikum-services.ru/";
