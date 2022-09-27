@@ -1,19 +1,13 @@
 package questionspage;
 
 import additionaltes.BaseTest;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import java.util.concurrent.TimeUnit;
 
 // Класс для проверки текстов раздела главной страницы "Вопросы о важном"
 public class HomePageQuestionsAboutImportantTest {
-    String nameDriver = "chrome";
     WebDriver driver;
     String baseUrl = "https://qa-scooter.praktikum-services.ru/";
 
