@@ -1,6 +1,7 @@
 package pageobject;
 
 import additionaltes.BaseTest;
+import constants.Consts;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,6 @@ import org.junit.runners.Parameterized;
 // Класс заказ самоката
 public class OrderByScooterTest {
     WebDriver driver;
-    String baseUrl = "https://qa-scooter.praktikum-services.ru/";
 
     private final String userName;
     private final String surName;
@@ -56,18 +56,61 @@ public class OrderByScooterTest {
     @Before
     public void startWebDriver() {
         BaseTest webDriver = new BaseTest();
-        driver = webDriver.chrome(driver, baseUrl);
+        driver = webDriver.chrome(driver, Consts.BASE_URL);
     }
 
     // Проверка заказа самоката по кнопке вверху
     @Test
     public void testClickUpButton() throws InterruptedException {
-
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
+
+        // Клик на верхнюю кнопку Заказать
         dialogPageWhoIs.clickHomePageUpButton();
-        dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
-        dialogPageAboutRent.setFieldsAboutRent(date, textForCourier, verifyText);
+
+        // Заполняем данные на странице Для кого самокат
+        // вводим значение в поле Имя
+        dialogPageWhoIs.setFieldName(userName);
+
+        // вводим значение в поле Фамилия
+        dialogPageWhoIs.setFieldSurname(surName);
+
+        // вводим значение в поле Адрес
+        dialogPageWhoIs.setFieldAdress(adress);
+
+        // выбираем из выпадающего списка станцию метро
+        dialogPageWhoIs.setFieldMetro(nameMetro);
+
+        // вводим значение в поле Номер телефона для курьера
+        dialogPageWhoIs.setFieldNumberForCourier(numbetForCourier);
+
+        // нажимаем на кнопку далее
+        dialogPageWhoIs.clickButtonNext();
+
+        // Заполняем данные на странице Про аренду
+        // вводим дату
+        dialogPageAboutRent.setFieldWhenToBring(date);
+
+        // вводим значение срока арены
+        dialogPageAboutRent.setFieldRentalPeriod();
+
+        // Отмечаем цвет самоката Черный
+        dialogPageAboutRent.setCheckBoxBlack();
+
+        // Отмечаем цвет самоката Серый
+        dialogPageAboutRent.setCheckBoxGray();
+
+        // вводим значение в поле комментарий для курьера
+        dialogPageAboutRent.setFieldTextForCourier(textForCourier);
+
+        // нажимаем на кнопку Заказать
+        dialogPageAboutRent.clickButtonOrder();
+
+        // подтверждаем заказ
+        dialogPageAboutRent.clickButtonDoYouWantToPlaceAnOrder();
+
+        // проверяем что заказ создан
+        dialogPageAboutRent.isOrderIsProcessed(verifyText);
     }
 
     // Проверка заказа самоката по кнопке внизу
@@ -77,9 +120,53 @@ public class OrderByScooterTest {
         DialogPageWhoIsTheScooterFor dialogPageWhoIs = new DialogPageWhoIsTheScooterFor(driver);
         DialogPageAboutRent dialogPageAboutRent = new DialogPageAboutRent(driver);
 
+        // Клик на нижнюю кнопку Заказать
         dialogPageWhoIs.clickHomePageDownButton();
-        dialogPageWhoIs.setFieldsWhoIs(userName, surName, adress, nameMetro, numbetForCourier);
-        dialogPageAboutRent.setFieldsAboutRent(date, textForCourier, verifyText);
+
+        // Заполняем данные на странице Для кого самокат
+        // вводим значение в поле Имя
+        dialogPageWhoIs.setFieldName(userName);
+
+        // вводим значение в поле Фамилия
+        dialogPageWhoIs.setFieldSurname(surName);
+
+        // вводим значение в поле Адрес
+        dialogPageWhoIs.setFieldAdress(adress);
+
+        // выбираем из выпадающего списка станцию метро
+        dialogPageWhoIs.setFieldMetro(nameMetro);
+
+        // вводим значение в поле Номер телефона для курьера
+        dialogPageWhoIs.setFieldNumberForCourier(numbetForCourier);
+
+        // нажимаем на кнопку далее
+        dialogPageWhoIs.clickButtonNext();
+
+        // Заполняем данные на странице Про аренду
+
+        // вводим дату
+        dialogPageAboutRent.setFieldWhenToBring(date);
+
+        // вводим значение срока арены
+        dialogPageAboutRent.setFieldRentalPeriod();
+
+        // Отмечаем цвет самоката Черный
+        dialogPageAboutRent.setCheckBoxBlack();
+
+        // Отмечаем цвет самоката Серый
+        dialogPageAboutRent.setCheckBoxGray();
+
+        // вводим значение в поле комментарий для курьера
+        dialogPageAboutRent.setFieldTextForCourier(textForCourier);
+
+        // нажимаем на кнопку Заказать
+        dialogPageAboutRent.clickButtonOrder();
+
+        // подтверждаем заказ
+        dialogPageAboutRent.clickButtonDoYouWantToPlaceAnOrder();
+
+        // проверяем что заказ создан
+        dialogPageAboutRent.isOrderIsProcessed(verifyText);
     }
 
     //

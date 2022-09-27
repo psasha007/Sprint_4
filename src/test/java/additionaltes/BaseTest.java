@@ -1,5 +1,6 @@
 package additionaltes;
 
+import constants.Consts;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,7 +16,7 @@ public class BaseTest {
         System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Consts.TIME_OUT_IN_SECONDS, TimeUnit.SECONDS);
         driver.get(baseUrl);
         return driver;
     }
@@ -25,7 +26,7 @@ public class BaseTest {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Consts.TIME_OUT_IN_SECONDS, TimeUnit.SECONDS);
         driver.get(baseUrl);
         return driver;
     }
@@ -39,7 +40,4 @@ public class BaseTest {
         driver.get(baseUrl);
         return driver;
     }
-
-
-
 }

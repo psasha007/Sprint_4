@@ -1,5 +1,6 @@
 package additionaltes;
 
+import constants.Consts;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,19 +8,18 @@ import org.openqa.selenium.*;
 
 public class AdditionalTest {
     WebDriver driver;
-    String baseUrl = "https://qa-scooter.praktikum-services.ru/";
 
     @Before
     public void startWebDriver() {
         BaseTest webDriver = new BaseTest();
-        driver = webDriver.chrome(driver, baseUrl);
+        driver = webDriver.chrome(driver, Consts.BASE_URL);
     }
 
     @Test
     // Проверить: если нажать на логотип «Самоката», попадёшь на главную страницу «Самоката».
     public void verifyScooterLogoHomePageTest(){
         ErrorsForOrderFormFields testUrl = new ErrorsForOrderFormFields(driver);
-        testUrl.isCheckUrlScooterLogoHomePage("https://qa-scooter.praktikum-services.ru/");
+        testUrl.isCheckUrlScooterLogoHomePage(Consts.BASE_URL);
     }
 
     @Test
