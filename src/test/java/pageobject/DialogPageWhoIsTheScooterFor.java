@@ -5,8 +5,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static java.lang.Thread.sleep;
-
 // Класс Диалога на странице "Для кого самокат"
 public class DialogPageWhoIsTheScooterFor {
 
@@ -17,6 +15,9 @@ public class DialogPageWhoIsTheScooterFor {
     public DialogPageWhoIsTheScooterFor(WebDriver driver){
         this.driver = driver;
     }
+
+    // Значение для локатора прокрутки
+    private String locatorScroll = "arguments[0].scrollIntoView();";
 
     // Локатор на Главной странице - Кнопка «Заказать» верхняя
     private By locatorUpButton = By.className("Button_Button__ra12g");
@@ -44,25 +45,33 @@ public class DialogPageWhoIsTheScooterFor {
 
     // Метод заполняет поле Имя
     public void setFieldName(String username) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldName));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorFieldName));
+
         driver.findElement(locatorFieldName).sendKeys(username);
     }
 
     // Метод заполняет поле Фамилия
     public void setFieldSurname(String userSurname) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldSurname));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorFieldSurname));
+
         driver.findElement(locatorFieldSurname).sendKeys(userSurname);
     }
 
     // Метод заполняет поле Адрес
     public void setFieldAdress(String adress) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldAdress));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorFieldAdress));
+
         driver.findElement(locatorFieldAdress).sendKeys(adress);
     }
 
     // Метод заполняет поле Станция метро
     public void setFieldMetro(String nameMetro) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldMetro));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorFieldMetro));
+
         driver.findElement(locatorFieldMetro).click();
         driver.findElement(locatorFieldMetro).sendKeys(nameMetro);
         driver.findElement(locatorFieldMetro).sendKeys(Keys.UP);
@@ -71,13 +80,17 @@ public class DialogPageWhoIsTheScooterFor {
 
     // Метод заполняет поле номер для курьера
     public void setFieldNumberForCourier(String numberForCourier) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorFieldNumberForCourier));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorFieldNumberForCourier));
+
         driver.findElement(locatorFieldNumberForCourier).sendKeys(numberForCourier);
     }
 
     // Метод жмакает по кнопке Далее
     public void clickButtonNext(){
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorButtonNext));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorButtonNext));
+
         driver.findElement(locatorButtonNext).click();
     }
 
@@ -93,17 +106,20 @@ public class DialogPageWhoIsTheScooterFor {
 
     // Метод жмакает по кнопке сверху Заказать
     public void clickHomePageUpButton(){
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorUpButton));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorUpButton));
+
         driver.findElement(locatorUpButton).click();
     }
 
     // Метод жмакает по кнопке снизу Заказать
     public void clickHomePageDownButton(){
-        //WebElement element = driver.findElement(By.cssSelector(".Button_Button__ra12g.Button_UltraBig__UU3Lp"));
         WebElement element = driver.findElement(locatorDownButton);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor)driver).executeScript(locatorScroll, element);
 
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorDownButton));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorDownButton));
+
         driver.findElement(locatorDownButton).click();
     }
 }

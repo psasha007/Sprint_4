@@ -49,51 +49,67 @@ public class DialogPageAboutRent {
 
     // Метод заполняем поле Когда привезти самокат
     public void setFieldWhenToBring(String date) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(fieldWhenToBring));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(fieldWhenToBring));
+
         driver.findElement(fieldWhenToBring).sendKeys(date);
         driver.findElement(fieldWhenToBring).sendKeys(Keys.ENTER);
     }
 
     // Метод кликаем по выпадающему списку Срок аренды
     public void setFieldRentalPeriod() {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(rentalPeriod));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(rentalPeriod));
+
         driver.findElement(rentalPeriod).click();
         driver.findElement(rentalPeriodDay).click();
     }
 
     // Метод отмечаем чек-бокс black
     public void setCheckBoxBlack() {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(black));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(black));
+
         driver.findElement(black).click();
     }
 
     // Метод отмечаем чек-бокс grey
     public void setCheckBoxGray() {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(grey));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(grey));
+
         driver.findElement(grey).click();
     }
 
     // Метод заполняем поле Комментарий для курьера
     public void setFieldTextForCourier(String text) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(fieldTextForCourier));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(fieldTextForCourier));
+
         driver.findElement(fieldTextForCourier).sendKeys(text);
     }
 
     // Метод кликаем по Заказать
     public void clickButtonOrder(){
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(clickButtonOrder));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(clickButtonOrder));
+
         driver.findElement(clickButtonOrder).click();
     }
 
     // Метод подтверждаем заказ
     public void clickButtonDoYouWantToPlaceAnOrder(){
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(doYouWantToPlaceAnOrder));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(doYouWantToPlaceAnOrder));
+
         driver.findElement(doYouWantToPlaceAnOrder).click();
     }
 
     // Метод проверки сообщения о заказе
     public void isOrderIsProcessed(String expected) {
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(orderIsProcessed));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(orderIsProcessed));
+
         WebElement actual = driver.findElement(orderIsProcessed);
         Assert.assertTrue(actual.getText().contains(expected));
     }

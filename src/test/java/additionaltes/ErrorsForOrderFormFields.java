@@ -154,7 +154,8 @@ public class ErrorsForOrderFormFields {
         String child_window=I1.next();
         child_window=I1.next();
         driver.switchTo().window(child_window);
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorDzen));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorDzen));
 
         Assert.assertEquals("Ошибка, url не совпадает: ", expected, driver.getCurrentUrl());
     }
@@ -163,10 +164,14 @@ public class ErrorsForOrderFormFields {
     public void isCheckWrongOrderNumber(String numberOrder) throws InterruptedException {
         driver.findElement(locatorOrderStatus).click();
         driver.findElement(locatorFieldOrderStatus).sendKeys(numberOrder);
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorButtonGo));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorButtonGo));
+
         driver.findElement(locatorButtonGo).click();
 
-        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).until(ExpectedConditions.visibilityOfElementLocated(locatorImageNotFound));
+        new WebDriverWait(driver, Consts.TIME_OUT_IN_SECONDS).
+                until(ExpectedConditions.visibilityOfElementLocated(locatorImageNotFound));
+
         WebElement actual = driver.findElement(locatorImageNotFound);
         Assert.assertTrue("Expected image not found", actual.isDisplayed());
     }
